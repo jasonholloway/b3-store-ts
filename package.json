@@ -1,17 +1,29 @@
 {
-  "name": "bb.data",
-  "version": "0.0.1",
+  "name": "@woodpigeon/b3-store-ts",
+  "version": "0.0.43",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "dist/",
+    "package.json"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@woodpigeon/b3-data": "../store/data-facade/target/js/npm",
+    "axios": "^0.16.2",
+    "lodash": "^4.17.4",
     "protobufjs": "~6.8.0"
   },
   "devDependencies": {
-    "tsd-jsdoc": "^2.0.0-beta.3"
+    "@types/chai": "^4.0.4",
+    "@types/lodash": "^4.14.74",
+    "@types/mocha": "^2.2.43",
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3"
   }
 }

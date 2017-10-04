@@ -14,7 +14,7 @@ function main {
         | egrep -v '^package .*$' \
         > $tempFile
 
-    pbjs -t static-module -r b3 -w es6 -o ${targetDir}/${protoVersion}.js $tempFile
+    pbjs -t static-module -r b3 -w commonjs -o ${targetDir}/${protoVersion}.js $tempFile
     rm -f $tempFile
 
     pbts -o ${targetDir}/${protoVersion}.d.ts ${targetDir}/${protoVersion}.js
