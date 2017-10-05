@@ -4,11 +4,10 @@ import { Data } from '@woodpigeon/b3-data'
 
 let d = new Data();
 
-const buffer = new ArrayBuffer(16);
-const r = new Int8Array(buffer);
+const r = new Uint8Array(8);
 r.fill(13, 0, 4);
 
-d.commit(buffer)
+d.commit(r)
     .then(() => {
         console.log('hello!');
     });

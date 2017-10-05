@@ -1,6 +1,6 @@
 {
   "name": "@woodpigeon/b3-store-ts",
-  "version": "0.0.43",
+  "version": "0.0.48",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
