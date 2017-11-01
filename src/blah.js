@@ -1,7 +1,6 @@
-const { Data } = require('@woodpigeon/b3-data');
+const { Fons, Sink } = require('@woodpigeon/b3-data');
 
-const d = new Data();
-
-Data().commit('')
+const fons = new Fons();
+const sink = new Sink();
 
 
