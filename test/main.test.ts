@@ -10,7 +10,7 @@ console.log('base url', bbCommitApiUrl);
 const fx : IFixture = new SimpleFixture();
 
 
-describe('updater', () => {
+xdescribe('updater', () => {
     let fx: IFixture;
 
     before(async () => {

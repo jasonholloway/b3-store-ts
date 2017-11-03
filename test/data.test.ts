@@ -1,15 +1,21 @@
-import { Data } from '@woodpigeon/b3-data'
+import { Fons, Sink, EventLog, EventReader, EventWriter } from '@woodpigeon/b3-data'
 import { expect } from 'chai'
 
 
 import { ICommand, Command } from '../src/protocol/v100.js'
 
-class TypedData {
 
-    private data : Data;
+const eventLog = new EventLog(
+                        (m) => Promise.resolve({}), 
+                        (m) => Promise.resolve(true));
 
-    constructor(...args) {
-        this.data = new Data(...args);
+
+class TypedSink {
+
+    private sink: Sink;
+
+    constructor(log: EventLog) {
+        this.sink = new Sink(log);
     }
 
     async commit(command: Command) {
@@ -17,11 +23,11 @@ class TypedData {
         if(err) throw Error(err);
 
         const buffer = Command.encodeDelimited(command).finish();
-        await this.data.commit(buffer)
+        await this.sink.commit(buffer)
     }
 
     async flush() {
-        await this.data.flush();
+        await this.sink.flush();
     }
 
 }
@@ -29,16 +35,20 @@ class TypedData {
 
 describe('updates', () => {
 
-    let data : Data;
+    let sink : Sink
+    let fons : Fons
+    let log : EventLog
 
     beforeEach(() => {
-        data = new Data();
+        log = new EventLog(null, null);
+        sink = new Sink(log)
+        fons = new Fons(log)
     });
 
     it('can be committed', async () => {
         const r = new Uint8Array(8);
-        await data.commit(r);
-        expect(data).to.be.null;
+        await sink.commit(r);
+        expect(sink).to.be.null;
     });
 
     xit('can be regurgitated', async () => {
