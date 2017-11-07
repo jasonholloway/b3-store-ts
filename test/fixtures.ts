@@ -1,5 +1,5 @@
 import { Repo, Update } from '../src/Repo'
-import { Command, Nop } from "../src/protocol/v100";
+import { } from "../src/protocol/v100";
 
 interface IFixture {
     repo: IRepo;
@@ -13,7 +13,7 @@ interface IStore {
 }
 
 interface IRepo {
-    commit(update: Update | Nop) : Promise<any>;
+    commit(update: Update) : Promise<any>;
 }
 
 class SimpleFixture implements IFixture {

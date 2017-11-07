@@ -1,297 +1,555 @@
 import * as $protobuf from "protobufjs";
 
-/** Properties of a Result. */
-export interface IResult {
+/** Properties of an OffsetMap. */
+export interface IOffsetMap {
 
-    /** Result ok */
-    ok?: boolean;
-
-    /** Result id */
-    id?: string;
+    /** OffsetMap offsets */
+    offsets?: { [k: string]: number };
 }
 
-/** Represents a Result. */
-export class Result {
+/** Represents an OffsetMap. */
+export class OffsetMap {
 
     /**
-     * Constructs a new Result.
+     * Constructs a new OffsetMap.
      * @param [properties] Properties to set
      */
-    constructor(properties?: IResult);
+    constructor(properties?: IOffsetMap);
 
-    /** Result ok. */
-    public ok: boolean;
-
-    /** Result id. */
-    public id: string;
+    /** OffsetMap offsets. */
+    public offsets: { [k: string]: number };
 
     /**
-     * Creates a new Result instance using the specified properties.
+     * Creates a new OffsetMap instance using the specified properties.
      * @param [properties] Properties to set
-     * @returns Result instance
+     * @returns OffsetMap instance
      */
-    public static create(properties?: IResult): Result;
+    public static create(properties?: IOffsetMap): OffsetMap;
 
     /**
-     * Encodes the specified Result message. Does not implicitly {@link Result.verify|verify} messages.
-     * @param message Result message or plain object to encode
+     * Encodes the specified OffsetMap message. Does not implicitly {@link OffsetMap.verify|verify} messages.
+     * @param message OffsetMap message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encode(message: IResult, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encode(message: IOffsetMap, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Encodes the specified Result message, length delimited. Does not implicitly {@link Result.verify|verify} messages.
-     * @param message Result message or plain object to encode
+     * Encodes the specified OffsetMap message, length delimited. Does not implicitly {@link OffsetMap.verify|verify} messages.
+     * @param message OffsetMap message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encodeDelimited(message: IResult, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encodeDelimited(message: IOffsetMap, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Decodes a Result message from the specified reader or buffer.
+     * Decodes an OffsetMap message from the specified reader or buffer.
      * @param reader Reader or buffer to decode from
      * @param [length] Message length if known beforehand
-     * @returns Result
+     * @returns OffsetMap
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Result;
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): OffsetMap;
 
     /**
-     * Decodes a Result message from the specified reader or buffer, length delimited.
+     * Decodes an OffsetMap message from the specified reader or buffer, length delimited.
      * @param reader Reader or buffer to decode from
-     * @returns Result
+     * @returns OffsetMap
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Result;
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): OffsetMap;
 
     /**
-     * Verifies a Result message.
+     * Verifies an OffsetMap message.
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
     public static verify(message: { [k: string]: any }): (string|null);
 
     /**
-     * Creates a Result message from a plain object. Also converts values to their respective internal types.
+     * Creates an OffsetMap message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
-     * @returns Result
+     * @returns OffsetMap
      */
-    public static fromObject(object: { [k: string]: any }): Result;
+    public static fromObject(object: { [k: string]: any }): OffsetMap;
 
     /**
-     * Creates a plain object from a Result message. Also converts values to other types if specified.
-     * @param message Result
+     * Creates a plain object from an OffsetMap message. Also converts values to other types if specified.
+     * @param message OffsetMap
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: Result, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: OffsetMap, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
     /**
-     * Converts this Result to JSON.
+     * Converts this OffsetMap to JSON.
      * @returns JSON object
      */
     public toJSON(): { [k: string]: any };
 }
 
-/** Properties of a Command. */
-export interface ICommand {
+/** Properties of a Payload. */
+export interface IPayload {
 
-    /** Command id */
-    id?: string;
-
-    /** Command putProduct */
-    putProduct?: IPutProduct;
-
-    /** Command deleteProduct */
-    deleteProduct?: IDeleteProduct;
-
-    /** Command putStock */
-    putStock?: IPutStock;
-
-    /** Command putImage */
-    putImage?: IPutImage;
+    /** Payload eventLists */
+    eventLists?: IEventList[];
 }
 
-/** Represents a Command. */
-export class Command {
+/** Represents a Payload. */
+export class Payload {
 
     /**
-     * Constructs a new Command.
+     * Constructs a new Payload.
      * @param [properties] Properties to set
      */
-    constructor(properties?: ICommand);
+    constructor(properties?: IPayload);
 
-    /** Command id. */
-    public id: string;
-
-    /** Command putProduct. */
-    public putProduct?: (IPutProduct|null);
-
-    /** Command deleteProduct. */
-    public deleteProduct?: (IDeleteProduct|null);
-
-    /** Command putStock. */
-    public putStock?: (IPutStock|null);
-
-    /** Command putImage. */
-    public putImage?: (IPutImage|null);
-
-    /** Command updateType. */
-    public updateType?: string;
+    /** Payload eventLists. */
+    public eventLists: IEventList[];
 
     /**
-     * Creates a new Command instance using the specified properties.
+     * Creates a new Payload instance using the specified properties.
      * @param [properties] Properties to set
-     * @returns Command instance
+     * @returns Payload instance
      */
-    public static create(properties?: ICommand): Command;
+    public static create(properties?: IPayload): Payload;
 
     /**
-     * Encodes the specified Command message. Does not implicitly {@link Command.verify|verify} messages.
-     * @param message Command message or plain object to encode
+     * Encodes the specified Payload message. Does not implicitly {@link Payload.verify|verify} messages.
+     * @param message Payload message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encode(message: ICommand, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encode(message: IPayload, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Encodes the specified Command message, length delimited. Does not implicitly {@link Command.verify|verify} messages.
-     * @param message Command message or plain object to encode
+     * Encodes the specified Payload message, length delimited. Does not implicitly {@link Payload.verify|verify} messages.
+     * @param message Payload message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encodeDelimited(message: ICommand, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encodeDelimited(message: IPayload, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Decodes a Command message from the specified reader or buffer.
+     * Decodes a Payload message from the specified reader or buffer.
      * @param reader Reader or buffer to decode from
      * @param [length] Message length if known beforehand
-     * @returns Command
+     * @returns Payload
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Command;
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Payload;
 
     /**
-     * Decodes a Command message from the specified reader or buffer, length delimited.
+     * Decodes a Payload message from the specified reader or buffer, length delimited.
      * @param reader Reader or buffer to decode from
-     * @returns Command
+     * @returns Payload
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Command;
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Payload;
 
     /**
-     * Verifies a Command message.
+     * Verifies a Payload message.
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
     public static verify(message: { [k: string]: any }): (string|null);
 
     /**
-     * Creates a Command message from a plain object. Also converts values to their respective internal types.
+     * Creates a Payload message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
-     * @returns Command
+     * @returns Payload
      */
-    public static fromObject(object: { [k: string]: any }): Command;
+    public static fromObject(object: { [k: string]: any }): Payload;
 
     /**
-     * Creates a plain object from a Command message. Also converts values to other types if specified.
-     * @param message Command
+     * Creates a plain object from a Payload message. Also converts values to other types if specified.
+     * @param message Payload
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: Command, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: Payload, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
     /**
-     * Converts this Command to JSON.
+     * Converts this Payload to JSON.
      * @returns JSON object
      */
     public toJSON(): { [k: string]: any };
 }
 
-/** Properties of a Nop. */
-export interface INop {
+/** Properties of an Event. */
+export interface IEvent {
+
+    /** Event version */
+    version?: number;
+
+    /** Event addNote */
+    addNote?: IAddNote;
 }
 
-/** Represents a Nop. */
-export class Nop {
+/** Represents an Event. */
+export class Event {
 
     /**
-     * Constructs a new Nop.
+     * Constructs a new Event.
      * @param [properties] Properties to set
      */
-    constructor(properties?: INop);
+    constructor(properties?: IEvent);
+
+    /** Event version. */
+    public version: number;
+
+    /** Event addNote. */
+    public addNote?: (IAddNote|null);
+
+    /** Event inner. */
+    public inner?: string;
 
     /**
-     * Creates a new Nop instance using the specified properties.
+     * Creates a new Event instance using the specified properties.
      * @param [properties] Properties to set
-     * @returns Nop instance
+     * @returns Event instance
      */
-    public static create(properties?: INop): Nop;
+    public static create(properties?: IEvent): Event;
 
     /**
-     * Encodes the specified Nop message. Does not implicitly {@link Nop.verify|verify} messages.
-     * @param message Nop message or plain object to encode
+     * Encodes the specified Event message. Does not implicitly {@link Event.verify|verify} messages.
+     * @param message Event message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encode(message: INop, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encode(message: IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Encodes the specified Nop message, length delimited. Does not implicitly {@link Nop.verify|verify} messages.
-     * @param message Nop message or plain object to encode
+     * Encodes the specified Event message, length delimited. Does not implicitly {@link Event.verify|verify} messages.
+     * @param message Event message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encodeDelimited(message: INop, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encodeDelimited(message: IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Decodes a Nop message from the specified reader or buffer.
+     * Decodes an Event message from the specified reader or buffer.
      * @param reader Reader or buffer to decode from
      * @param [length] Message length if known beforehand
-     * @returns Nop
+     * @returns Event
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Nop;
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Event;
 
     /**
-     * Decodes a Nop message from the specified reader or buffer, length delimited.
+     * Decodes an Event message from the specified reader or buffer, length delimited.
      * @param reader Reader or buffer to decode from
-     * @returns Nop
+     * @returns Event
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Nop;
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Event;
 
     /**
-     * Verifies a Nop message.
+     * Verifies an Event message.
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
     public static verify(message: { [k: string]: any }): (string|null);
 
     /**
-     * Creates a Nop message from a plain object. Also converts values to their respective internal types.
+     * Creates an Event message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
-     * @returns Nop
+     * @returns Event
      */
-    public static fromObject(object: { [k: string]: any }): Nop;
+    public static fromObject(object: { [k: string]: any }): Event;
 
     /**
-     * Creates a plain object from a Nop message. Also converts values to other types if specified.
-     * @param message Nop
+     * Creates a plain object from an Event message. Also converts values to other types if specified.
+     * @param message Event
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: Nop, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: Event, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
     /**
-     * Converts this Nop to JSON.
+     * Converts this Event to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
+/** Properties of an EventList. */
+export interface IEventList {
+
+    /** EventList ref */
+    ref?: string;
+
+    /** EventList events */
+    events?: IEvent[];
+}
+
+/** Represents an EventList. */
+export class EventList {
+
+    /**
+     * Constructs a new EventList.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IEventList);
+
+    /** EventList ref. */
+    public ref: string;
+
+    /** EventList events. */
+    public events: IEvent[];
+
+    /**
+     * Creates a new EventList instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns EventList instance
+     */
+    public static create(properties?: IEventList): EventList;
+
+    /**
+     * Encodes the specified EventList message. Does not implicitly {@link EventList.verify|verify} messages.
+     * @param message EventList message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IEventList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified EventList message, length delimited. Does not implicitly {@link EventList.verify|verify} messages.
+     * @param message EventList message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IEventList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes an EventList message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns EventList
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): EventList;
+
+    /**
+     * Decodes an EventList message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns EventList
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): EventList;
+
+    /**
+     * Verifies an EventList message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates an EventList message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns EventList
+     */
+    public static fromObject(object: { [k: string]: any }): EventList;
+
+    /**
+     * Creates a plain object from an EventList message. Also converts values to other types if specified.
+     * @param message EventList
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: EventList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this EventList to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
+/** Properties of a NoteList. */
+export interface INoteList {
+
+    /** NoteList notes */
+    notes?: string[];
+}
+
+/** Represents a NoteList. */
+export class NoteList {
+
+    /**
+     * Constructs a new NoteList.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: INoteList);
+
+    /** NoteList notes. */
+    public notes: string[];
+
+    /**
+     * Creates a new NoteList instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns NoteList instance
+     */
+    public static create(properties?: INoteList): NoteList;
+
+    /**
+     * Encodes the specified NoteList message. Does not implicitly {@link NoteList.verify|verify} messages.
+     * @param message NoteList message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: INoteList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified NoteList message, length delimited. Does not implicitly {@link NoteList.verify|verify} messages.
+     * @param message NoteList message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: INoteList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes a NoteList message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns NoteList
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): NoteList;
+
+    /**
+     * Decodes a NoteList message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns NoteList
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): NoteList;
+
+    /**
+     * Verifies a NoteList message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates a NoteList message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns NoteList
+     */
+    public static fromObject(object: { [k: string]: any }): NoteList;
+
+    /**
+     * Creates a plain object from a NoteList message. Also converts values to other types if specified.
+     * @param message NoteList
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: NoteList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this NoteList to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
+/** Properties of an AddNote. */
+export interface IAddNote {
+
+    /** AddNote note */
+    note?: string;
+}
+
+/** Represents an AddNote. */
+export class AddNote {
+
+    /**
+     * Constructs a new AddNote.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IAddNote);
+
+    /** AddNote note. */
+    public note: string;
+
+    /**
+     * Creates a new AddNote instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns AddNote instance
+     */
+    public static create(properties?: IAddNote): AddNote;
+
+    /**
+     * Encodes the specified AddNote message. Does not implicitly {@link AddNote.verify|verify} messages.
+     * @param message AddNote message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IAddNote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified AddNote message, length delimited. Does not implicitly {@link AddNote.verify|verify} messages.
+     * @param message AddNote message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IAddNote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes an AddNote message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns AddNote
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): AddNote;
+
+    /**
+     * Decodes an AddNote message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns AddNote
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): AddNote;
+
+    /**
+     * Verifies an AddNote message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates an AddNote message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns AddNote
+     */
+    public static fromObject(object: { [k: string]: any }): AddNote;
+
+    /**
+     * Creates a plain object from an AddNote message. Also converts values to other types if specified.
+     * @param message AddNote
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: AddNote, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this AddNote to JSON.
      * @returns JSON object
      */
     public toJSON(): { [k: string]: any };

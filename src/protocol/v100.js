@@ -9,24 +9,24 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots.b3 || ($protobuf.roots.b3 = {});
 
-$root.Result = (function() {
+$root.OffsetMap = (function() {
 
     /**
-     * Properties of a Result.
-     * @exports IResult
-     * @interface IResult
-     * @property {boolean} [ok] Result ok
-     * @property {string} [id] Result id
+     * Properties of an OffsetMap.
+     * @exports IOffsetMap
+     * @interface IOffsetMap
+     * @property {Object.<string,number>} [offsets] OffsetMap offsets
      */
 
     /**
-     * Constructs a new Result.
-     * @exports Result
-     * @classdesc Represents a Result.
+     * Constructs a new OffsetMap.
+     * @exports OffsetMap
+     * @classdesc Represents an OffsetMap.
      * @constructor
-     * @param {IResult=} [properties] Properties to set
+     * @param {IOffsetMap=} [properties] Properties to set
      */
-    function Result(properties) {
+    function OffsetMap(properties) {
+        this.offsets = {};
         if (properties)
             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
@@ -34,88 +34,81 @@ $root.Result = (function() {
     }
 
     /**
-     * Result ok.
-     * @member {boolean}ok
-     * @memberof Result
+     * OffsetMap offsets.
+     * @member {Object.<string,number>}offsets
+     * @memberof OffsetMap
      * @instance
      */
-    Result.prototype.ok = false;
+    OffsetMap.prototype.offsets = $util.emptyObject;
 
     /**
-     * Result id.
-     * @member {string}id
-     * @memberof Result
-     * @instance
-     */
-    Result.prototype.id = "";
-
-    /**
-     * Creates a new Result instance using the specified properties.
+     * Creates a new OffsetMap instance using the specified properties.
      * @function create
-     * @memberof Result
+     * @memberof OffsetMap
      * @static
-     * @param {IResult=} [properties] Properties to set
-     * @returns {Result} Result instance
+     * @param {IOffsetMap=} [properties] Properties to set
+     * @returns {OffsetMap} OffsetMap instance
      */
-    Result.create = function create(properties) {
-        return new Result(properties);
+    OffsetMap.create = function create(properties) {
+        return new OffsetMap(properties);
     };
 
     /**
-     * Encodes the specified Result message. Does not implicitly {@link Result.verify|verify} messages.
+     * Encodes the specified OffsetMap message. Does not implicitly {@link OffsetMap.verify|verify} messages.
      * @function encode
-     * @memberof Result
+     * @memberof OffsetMap
      * @static
-     * @param {IResult} message Result message or plain object to encode
+     * @param {IOffsetMap} message OffsetMap message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    Result.encode = function encode(message, writer) {
+    OffsetMap.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.ok != null && message.hasOwnProperty("ok"))
-            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.ok);
-        if (message.id != null && message.hasOwnProperty("id"))
-            writer.uint32(/* id 2, wireType 2 =*/18).string(message.id);
+        if (message.offsets != null && message.hasOwnProperty("offsets"))
+            for (var keys = Object.keys(message.offsets), i = 0; i < keys.length; ++i)
+                writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 0 =*/16).uint32(message.offsets[keys[i]]).ldelim();
         return writer;
     };
 
     /**
-     * Encodes the specified Result message, length delimited. Does not implicitly {@link Result.verify|verify} messages.
+     * Encodes the specified OffsetMap message, length delimited. Does not implicitly {@link OffsetMap.verify|verify} messages.
      * @function encodeDelimited
-     * @memberof Result
+     * @memberof OffsetMap
      * @static
-     * @param {IResult} message Result message or plain object to encode
+     * @param {IOffsetMap} message OffsetMap message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    Result.encodeDelimited = function encodeDelimited(message, writer) {
+    OffsetMap.encodeDelimited = function encodeDelimited(message, writer) {
         return this.encode(message, writer).ldelim();
     };
 
     /**
-     * Decodes a Result message from the specified reader or buffer.
+     * Decodes an OffsetMap message from the specified reader or buffer.
      * @function decode
-     * @memberof Result
+     * @memberof OffsetMap
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
      * @param {number} [length] Message length if known beforehand
-     * @returns {Result} Result
+     * @returns {OffsetMap} OffsetMap
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    Result.decode = function decode(reader, length) {
+    OffsetMap.decode = function decode(reader, length) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Result();
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.OffsetMap(), key;
         while (reader.pos < end) {
             var tag = reader.uint32();
             switch (tag >>> 3) {
             case 1:
-                message.ok = reader.bool();
-                break;
-            case 2:
-                message.id = reader.string();
+                reader.skip().pos++;
+                if (message.offsets === $util.emptyObject)
+                    message.offsets = {};
+                key = reader.string();
+                reader.pos++;
+                message.offsets[key] = reader.uint32();
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -126,119 +119,121 @@ $root.Result = (function() {
     };
 
     /**
-     * Decodes a Result message from the specified reader or buffer, length delimited.
+     * Decodes an OffsetMap message from the specified reader or buffer, length delimited.
      * @function decodeDelimited
-     * @memberof Result
+     * @memberof OffsetMap
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {Result} Result
+     * @returns {OffsetMap} OffsetMap
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    Result.decodeDelimited = function decodeDelimited(reader) {
+    OffsetMap.decodeDelimited = function decodeDelimited(reader) {
         if (!(reader instanceof $Reader))
             reader = new $Reader(reader);
         return this.decode(reader, reader.uint32());
     };
 
     /**
-     * Verifies a Result message.
+     * Verifies an OffsetMap message.
      * @function verify
-     * @memberof Result
+     * @memberof OffsetMap
      * @static
      * @param {Object.<string,*>} message Plain object to verify
      * @returns {string|null} `null` if valid, otherwise the reason why it is not
      */
-    Result.verify = function verify(message) {
+    OffsetMap.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
-        if (message.ok != null && message.hasOwnProperty("ok"))
-            if (typeof message.ok !== "boolean")
-                return "ok: boolean expected";
-        if (message.id != null && message.hasOwnProperty("id"))
-            if (!$util.isString(message.id))
-                return "id: string expected";
+        if (message.offsets != null && message.hasOwnProperty("offsets")) {
+            if (!$util.isObject(message.offsets))
+                return "offsets: object expected";
+            var key = Object.keys(message.offsets);
+            for (var i = 0; i < key.length; ++i)
+                if (!$util.isInteger(message.offsets[key[i]]))
+                    return "offsets: integer{k:string} expected";
+        }
         return null;
     };
 
     /**
-     * Creates a Result message from a plain object. Also converts values to their respective internal types.
+     * Creates an OffsetMap message from a plain object. Also converts values to their respective internal types.
      * @function fromObject
-     * @memberof Result
+     * @memberof OffsetMap
      * @static
      * @param {Object.<string,*>} object Plain object
-     * @returns {Result} Result
+     * @returns {OffsetMap} OffsetMap
      */
-    Result.fromObject = function fromObject(object) {
-        if (object instanceof $root.Result)
+    OffsetMap.fromObject = function fromObject(object) {
+        if (object instanceof $root.OffsetMap)
             return object;
-        var message = new $root.Result();
-        if (object.ok != null)
-            message.ok = Boolean(object.ok);
-        if (object.id != null)
-            message.id = String(object.id);
+        var message = new $root.OffsetMap();
+        if (object.offsets) {
+            if (typeof object.offsets !== "object")
+                throw TypeError(".OffsetMap.offsets: object expected");
+            message.offsets = {};
+            for (var keys = Object.keys(object.offsets), i = 0; i < keys.length; ++i)
+                message.offsets[keys[i]] = object.offsets[keys[i]] >>> 0;
+        }
         return message;
     };
 
     /**
-     * Creates a plain object from a Result message. Also converts values to other types if specified.
+     * Creates a plain object from an OffsetMap message. Also converts values to other types if specified.
      * @function toObject
-     * @memberof Result
+     * @memberof OffsetMap
      * @static
-     * @param {Result} message Result
+     * @param {OffsetMap} message OffsetMap
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    Result.toObject = function toObject(message, options) {
+    OffsetMap.toObject = function toObject(message, options) {
         if (!options)
             options = {};
         var object = {};
-        if (options.defaults) {
-            object.ok = false;
-            object.id = "";
+        if (options.objects || options.defaults)
+            object.offsets = {};
+        var keys2;
+        if (message.offsets && (keys2 = Object.keys(message.offsets)).length) {
+            object.offsets = {};
+            for (var j = 0; j < keys2.length; ++j)
+                object.offsets[keys2[j]] = message.offsets[keys2[j]];
         }
-        if (message.ok != null && message.hasOwnProperty("ok"))
-            object.ok = message.ok;
-        if (message.id != null && message.hasOwnProperty("id"))
-            object.id = message.id;
         return object;
     };
 
     /**
-     * Converts this Result to JSON.
+     * Converts this OffsetMap to JSON.
      * @function toJSON
-     * @memberof Result
+     * @memberof OffsetMap
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    Result.prototype.toJSON = function toJSON() {
+    OffsetMap.prototype.toJSON = function toJSON() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    return Result;
+    return OffsetMap;
 })();
 
-$root.Command = (function() {
+$root.Payload = (function() {
 
     /**
-     * Properties of a Command.
-     * @exports ICommand
-     * @interface ICommand
-     * @property {string} [id] Command id
-     * @property {IPutProduct} [putProduct] Command putProduct
-     * @property {IDeleteProduct} [deleteProduct] Command deleteProduct
-     * @property {IPutStock} [putStock] Command putStock
-     * @property {IPutImage} [putImage] Command putImage
+     * Properties of a Payload.
+     * @exports IPayload
+     * @interface IPayload
+     * @property {Array.<IEventList>} [eventLists] Payload eventLists
      */
 
     /**
-     * Constructs a new Command.
-     * @exports Command
-     * @classdesc Represents a Command.
+     * Constructs a new Payload.
+     * @exports Payload
+     * @classdesc Represents a Payload.
      * @constructor
-     * @param {ICommand=} [properties] Properties to set
+     * @param {IPayload=} [properties] Properties to set
      */
-    function Command(properties) {
+    function Payload(properties) {
+        this.eventLists = [];
         if (properties)
             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
@@ -246,141 +241,309 @@ $root.Command = (function() {
     }
 
     /**
-     * Command id.
-     * @member {string}id
-     * @memberof Command
+     * Payload eventLists.
+     * @member {Array.<IEventList>}eventLists
+     * @memberof Payload
      * @instance
      */
-    Command.prototype.id = "";
+    Payload.prototype.eventLists = $util.emptyArray;
 
     /**
-     * Command putProduct.
-     * @member {(IPutProduct|null|undefined)}putProduct
-     * @memberof Command
-     * @instance
+     * Creates a new Payload instance using the specified properties.
+     * @function create
+     * @memberof Payload
+     * @static
+     * @param {IPayload=} [properties] Properties to set
+     * @returns {Payload} Payload instance
      */
-    Command.prototype.putProduct = null;
+    Payload.create = function create(properties) {
+        return new Payload(properties);
+    };
 
     /**
-     * Command deleteProduct.
-     * @member {(IDeleteProduct|null|undefined)}deleteProduct
-     * @memberof Command
-     * @instance
+     * Encodes the specified Payload message. Does not implicitly {@link Payload.verify|verify} messages.
+     * @function encode
+     * @memberof Payload
+     * @static
+     * @param {IPayload} message Payload message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
      */
-    Command.prototype.deleteProduct = null;
+    Payload.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.eventLists != null && message.eventLists.length)
+            for (var i = 0; i < message.eventLists.length; ++i)
+                $root.EventList.encode(message.eventLists[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+        return writer;
+    };
 
     /**
-     * Command putStock.
-     * @member {(IPutStock|null|undefined)}putStock
-     * @memberof Command
-     * @instance
+     * Encodes the specified Payload message, length delimited. Does not implicitly {@link Payload.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof Payload
+     * @static
+     * @param {IPayload} message Payload message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
      */
-    Command.prototype.putStock = null;
+    Payload.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
 
     /**
-     * Command putImage.
-     * @member {(IPutImage|null|undefined)}putImage
-     * @memberof Command
+     * Decodes a Payload message from the specified reader or buffer.
+     * @function decode
+     * @memberof Payload
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {Payload} Payload
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    Payload.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Payload();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                if (!(message.eventLists && message.eventLists.length))
+                    message.eventLists = [];
+                message.eventLists.push($root.EventList.decode(reader, reader.uint32()));
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a Payload message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof Payload
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {Payload} Payload
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    Payload.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a Payload message.
+     * @function verify
+     * @memberof Payload
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    Payload.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.eventLists != null && message.hasOwnProperty("eventLists")) {
+            if (!Array.isArray(message.eventLists))
+                return "eventLists: array expected";
+            for (var i = 0; i < message.eventLists.length; ++i) {
+                var error = $root.EventList.verify(message.eventLists[i]);
+                if (error)
+                    return "eventLists." + error;
+            }
+        }
+        return null;
+    };
+
+    /**
+     * Creates a Payload message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof Payload
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {Payload} Payload
+     */
+    Payload.fromObject = function fromObject(object) {
+        if (object instanceof $root.Payload)
+            return object;
+        var message = new $root.Payload();
+        if (object.eventLists) {
+            if (!Array.isArray(object.eventLists))
+                throw TypeError(".Payload.eventLists: array expected");
+            message.eventLists = [];
+            for (var i = 0; i < object.eventLists.length; ++i) {
+                if (typeof object.eventLists[i] !== "object")
+                    throw TypeError(".Payload.eventLists: object expected");
+                message.eventLists[i] = $root.EventList.fromObject(object.eventLists[i]);
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a Payload message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof Payload
+     * @static
+     * @param {Payload} message Payload
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    Payload.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.arrays || options.defaults)
+            object.eventLists = [];
+        if (message.eventLists && message.eventLists.length) {
+            object.eventLists = [];
+            for (var j = 0; j < message.eventLists.length; ++j)
+                object.eventLists[j] = $root.EventList.toObject(message.eventLists[j], options);
+        }
+        return object;
+    };
+
+    /**
+     * Converts this Payload to JSON.
+     * @function toJSON
+     * @memberof Payload
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    Payload.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return Payload;
+})();
+
+$root.Event = (function() {
+
+    /**
+     * Properties of an Event.
+     * @exports IEvent
+     * @interface IEvent
+     * @property {number} [version] Event version
+     * @property {IAddNote} [addNote] Event addNote
+     */
+
+    /**
+     * Constructs a new Event.
+     * @exports Event
+     * @classdesc Represents an Event.
+     * @constructor
+     * @param {IEvent=} [properties] Properties to set
+     */
+    function Event(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * Event version.
+     * @member {number}version
+     * @memberof Event
      * @instance
      */
-    Command.prototype.putImage = null;
+    Event.prototype.version = 0;
+
+    /**
+     * Event addNote.
+     * @member {(IAddNote|null|undefined)}addNote
+     * @memberof Event
+     * @instance
+     */
+    Event.prototype.addNote = null;
 
     // OneOf field names bound to virtual getters and setters
     var $oneOfFields;
 
     /**
-     * Command updateType.
-     * @member {string|undefined} updateType
-     * @memberof Command
+     * Event inner.
+     * @member {string|undefined} inner
+     * @memberof Event
      * @instance
      */
-    Object.defineProperty(Command.prototype, "updateType", {
-        get: $util.oneOfGetter($oneOfFields = ["putProduct", "deleteProduct", "putStock", "putImage"]),
+    Object.defineProperty(Event.prototype, "inner", {
+        get: $util.oneOfGetter($oneOfFields = ["addNote"]),
         set: $util.oneOfSetter($oneOfFields)
     });
 
     /**
-     * Creates a new Command instance using the specified properties.
+     * Creates a new Event instance using the specified properties.
      * @function create
-     * @memberof Command
+     * @memberof Event
      * @static
-     * @param {ICommand=} [properties] Properties to set
-     * @returns {Command} Command instance
+     * @param {IEvent=} [properties] Properties to set
+     * @returns {Event} Event instance
      */
-    Command.create = function create(properties) {
-        return new Command(properties);
+    Event.create = function create(properties) {
+        return new Event(properties);
     };
 
     /**
-     * Encodes the specified Command message. Does not implicitly {@link Command.verify|verify} messages.
+     * Encodes the specified Event message. Does not implicitly {@link Event.verify|verify} messages.
      * @function encode
-     * @memberof Command
+     * @memberof Event
      * @static
-     * @param {ICommand} message Command message or plain object to encode
+     * @param {IEvent} message Event message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    Command.encode = function encode(message, writer) {
+    Event.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.id != null && message.hasOwnProperty("id"))
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
-        if (message.putProduct != null && message.hasOwnProperty("putProduct"))
-            $root.PutProduct.encode(message.putProduct, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-        if (message.deleteProduct != null && message.hasOwnProperty("deleteProduct"))
-            $root.DeleteProduct.encode(message.deleteProduct, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-        if (message.putStock != null && message.hasOwnProperty("putStock"))
-            $root.PutStock.encode(message.putStock, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-        if (message.putImage != null && message.hasOwnProperty("putImage"))
-            $root.PutImage.encode(message.putImage, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+        if (message.version != null && message.hasOwnProperty("version"))
+            writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.version);
+        if (message.addNote != null && message.hasOwnProperty("addNote"))
+            $root.AddNote.encode(message.addNote, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
         return writer;
     };
 
     /**
-     * Encodes the specified Command message, length delimited. Does not implicitly {@link Command.verify|verify} messages.
+     * Encodes the specified Event message, length delimited. Does not implicitly {@link Event.verify|verify} messages.
      * @function encodeDelimited
-     * @memberof Command
+     * @memberof Event
      * @static
-     * @param {ICommand} message Command message or plain object to encode
+     * @param {IEvent} message Event message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    Command.encodeDelimited = function encodeDelimited(message, writer) {
+    Event.encodeDelimited = function encodeDelimited(message, writer) {
         return this.encode(message, writer).ldelim();
     };
 
     /**
-     * Decodes a Command message from the specified reader or buffer.
+     * Decodes an Event message from the specified reader or buffer.
      * @function decode
-     * @memberof Command
+     * @memberof Event
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
      * @param {number} [length] Message length if known beforehand
-     * @returns {Command} Command
+     * @returns {Event} Event
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    Command.decode = function decode(reader, length) {
+    Event.decode = function decode(reader, length) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Command();
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Event();
         while (reader.pos < end) {
             var tag = reader.uint32();
             switch (tag >>> 3) {
-            case 1:
-                message.id = reader.string();
-                break;
             case 2:
-                message.putProduct = $root.PutProduct.decode(reader, reader.uint32());
+                message.version = reader.uint32();
                 break;
-            case 3:
-                message.deleteProduct = $root.DeleteProduct.decode(reader, reader.uint32());
-                break;
-            case 4:
-                message.putStock = $root.PutStock.decode(reader, reader.uint32());
-                break;
-            case 5:
-                message.putImage = $root.PutImage.decode(reader, reader.uint32());
+            case 7:
+                message.addNote = $root.AddNote.decode(reader, reader.uint32());
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -391,176 +554,125 @@ $root.Command = (function() {
     };
 
     /**
-     * Decodes a Command message from the specified reader or buffer, length delimited.
+     * Decodes an Event message from the specified reader or buffer, length delimited.
      * @function decodeDelimited
-     * @memberof Command
+     * @memberof Event
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {Command} Command
+     * @returns {Event} Event
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    Command.decodeDelimited = function decodeDelimited(reader) {
+    Event.decodeDelimited = function decodeDelimited(reader) {
         if (!(reader instanceof $Reader))
             reader = new $Reader(reader);
         return this.decode(reader, reader.uint32());
     };
 
     /**
-     * Verifies a Command message.
+     * Verifies an Event message.
      * @function verify
-     * @memberof Command
+     * @memberof Event
      * @static
      * @param {Object.<string,*>} message Plain object to verify
      * @returns {string|null} `null` if valid, otherwise the reason why it is not
      */
-    Command.verify = function verify(message) {
+    Event.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
         var properties = {};
-        if (message.id != null && message.hasOwnProperty("id"))
-            if (!$util.isString(message.id))
-                return "id: string expected";
-        if (message.putProduct != null && message.hasOwnProperty("putProduct")) {
-            properties.updateType = 1;
-            var error = $root.PutProduct.verify(message.putProduct);
+        if (message.version != null && message.hasOwnProperty("version"))
+            if (!$util.isInteger(message.version))
+                return "version: integer expected";
+        if (message.addNote != null && message.hasOwnProperty("addNote")) {
+            properties.inner = 1;
+            var error = $root.AddNote.verify(message.addNote);
             if (error)
-                return "putProduct." + error;
-        }
-        if (message.deleteProduct != null && message.hasOwnProperty("deleteProduct")) {
-            if (properties.updateType === 1)
-                return "updateType: multiple values";
-            properties.updateType = 1;
-            error = $root.DeleteProduct.verify(message.deleteProduct);
-            if (error)
-                return "deleteProduct." + error;
-        }
-        if (message.putStock != null && message.hasOwnProperty("putStock")) {
-            if (properties.updateType === 1)
-                return "updateType: multiple values";
-            properties.updateType = 1;
-            error = $root.PutStock.verify(message.putStock);
-            if (error)
-                return "putStock." + error;
-        }
-        if (message.putImage != null && message.hasOwnProperty("putImage")) {
-            if (properties.updateType === 1)
-                return "updateType: multiple values";
-            properties.updateType = 1;
-            error = $root.PutImage.verify(message.putImage);
-            if (error)
-                return "putImage." + error;
+                return "addNote." + error;
         }
         return null;
     };
 
     /**
-     * Creates a Command message from a plain object. Also converts values to their respective internal types.
+     * Creates an Event message from a plain object. Also converts values to their respective internal types.
      * @function fromObject
-     * @memberof Command
+     * @memberof Event
      * @static
      * @param {Object.<string,*>} object Plain object
-     * @returns {Command} Command
+     * @returns {Event} Event
      */
-    Command.fromObject = function fromObject(object) {
-        if (object instanceof $root.Command)
+    Event.fromObject = function fromObject(object) {
+        if (object instanceof $root.Event)
             return object;
-        var message = new $root.Command();
-        if (object.id != null)
-            message.id = String(object.id);
-        if (object.putProduct != null) {
-            if (typeof object.putProduct !== "object")
-                throw TypeError(".Command.putProduct: object expected");
-            message.putProduct = $root.PutProduct.fromObject(object.putProduct);
-        }
-        if (object.deleteProduct != null) {
-            if (typeof object.deleteProduct !== "object")
-                throw TypeError(".Command.deleteProduct: object expected");
-            message.deleteProduct = $root.DeleteProduct.fromObject(object.deleteProduct);
-        }
-        if (object.putStock != null) {
-            if (typeof object.putStock !== "object")
-                throw TypeError(".Command.putStock: object expected");
-            message.putStock = $root.PutStock.fromObject(object.putStock);
-        }
-        if (object.putImage != null) {
-            if (typeof object.putImage !== "object")
-                throw TypeError(".Command.putImage: object expected");
-            message.putImage = $root.PutImage.fromObject(object.putImage);
+        var message = new $root.Event();
+        if (object.version != null)
+            message.version = object.version >>> 0;
+        if (object.addNote != null) {
+            if (typeof object.addNote !== "object")
+                throw TypeError(".Event.addNote: object expected");
+            message.addNote = $root.AddNote.fromObject(object.addNote);
         }
         return message;
     };
 
     /**
-     * Creates a plain object from a Command message. Also converts values to other types if specified.
+     * Creates a plain object from an Event message. Also converts values to other types if specified.
      * @function toObject
-     * @memberof Command
+     * @memberof Event
      * @static
-     * @param {Command} message Command
+     * @param {Event} message Event
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    Command.toObject = function toObject(message, options) {
+    Event.toObject = function toObject(message, options) {
         if (!options)
             options = {};
         var object = {};
         if (options.defaults)
-            object.id = "";
-        if (message.id != null && message.hasOwnProperty("id"))
-            object.id = message.id;
-        if (message.putProduct != null && message.hasOwnProperty("putProduct")) {
-            object.putProduct = $root.PutProduct.toObject(message.putProduct, options);
+            object.version = 0;
+        if (message.version != null && message.hasOwnProperty("version"))
+            object.version = message.version;
+        if (message.addNote != null && message.hasOwnProperty("addNote")) {
+            object.addNote = $root.AddNote.toObject(message.addNote, options);
             if (options.oneofs)
-                object.updateType = "putProduct";
-        }
-        if (message.deleteProduct != null && message.hasOwnProperty("deleteProduct")) {
-            object.deleteProduct = $root.DeleteProduct.toObject(message.deleteProduct, options);
-            if (options.oneofs)
-                object.updateType = "deleteProduct";
-        }
-        if (message.putStock != null && message.hasOwnProperty("putStock")) {
-            object.putStock = $root.PutStock.toObject(message.putStock, options);
-            if (options.oneofs)
-                object.updateType = "putStock";
-        }
-        if (message.putImage != null && message.hasOwnProperty("putImage")) {
-            object.putImage = $root.PutImage.toObject(message.putImage, options);
-            if (options.oneofs)
-                object.updateType = "putImage";
+                object.inner = "addNote";
         }
         return object;
     };
 
     /**
-     * Converts this Command to JSON.
+     * Converts this Event to JSON.
      * @function toJSON
-     * @memberof Command
+     * @memberof Event
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    Command.prototype.toJSON = function toJSON() {
+    Event.prototype.toJSON = function toJSON() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    return Command;
+    return Event;
 })();
 
-$root.Nop = (function() {
+$root.EventList = (function() {
 
     /**
-     * Properties of a Nop.
-     * @exports INop
-     * @interface INop
+     * Properties of an EventList.
+     * @exports IEventList
+     * @interface IEventList
+     * @property {string} [ref] EventList ref
+     * @property {Array.<IEvent>} [events] EventList events
      */
 
     /**
-     * Constructs a new Nop.
-     * @exports Nop
-     * @classdesc Represents a Nop.
+     * Constructs a new EventList.
+     * @exports EventList
+     * @classdesc Represents an EventList.
      * @constructor
-     * @param {INop=} [properties] Properties to set
+     * @param {IEventList=} [properties] Properties to set
      */
-    function Nop(properties) {
+    function EventList(properties) {
+        this.events = [];
         if (properties)
             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
@@ -568,63 +680,92 @@ $root.Nop = (function() {
     }
 
     /**
-     * Creates a new Nop instance using the specified properties.
-     * @function create
-     * @memberof Nop
-     * @static
-     * @param {INop=} [properties] Properties to set
-     * @returns {Nop} Nop instance
+     * EventList ref.
+     * @member {string}ref
+     * @memberof EventList
+     * @instance
      */
-    Nop.create = function create(properties) {
-        return new Nop(properties);
+    EventList.prototype.ref = "";
+
+    /**
+     * EventList events.
+     * @member {Array.<IEvent>}events
+     * @memberof EventList
+     * @instance
+     */
+    EventList.prototype.events = $util.emptyArray;
+
+    /**
+     * Creates a new EventList instance using the specified properties.
+     * @function create
+     * @memberof EventList
+     * @static
+     * @param {IEventList=} [properties] Properties to set
+     * @returns {EventList} EventList instance
+     */
+    EventList.create = function create(properties) {
+        return new EventList(properties);
     };
 
     /**
-     * Encodes the specified Nop message. Does not implicitly {@link Nop.verify|verify} messages.
+     * Encodes the specified EventList message. Does not implicitly {@link EventList.verify|verify} messages.
      * @function encode
-     * @memberof Nop
+     * @memberof EventList
      * @static
-     * @param {INop} message Nop message or plain object to encode
+     * @param {IEventList} message EventList message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    Nop.encode = function encode(message, writer) {
+    EventList.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
+        if (message.ref != null && message.hasOwnProperty("ref"))
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.ref);
+        if (message.events != null && message.events.length)
+            for (var i = 0; i < message.events.length; ++i)
+                $root.Event.encode(message.events[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
         return writer;
     };
 
     /**
-     * Encodes the specified Nop message, length delimited. Does not implicitly {@link Nop.verify|verify} messages.
+     * Encodes the specified EventList message, length delimited. Does not implicitly {@link EventList.verify|verify} messages.
      * @function encodeDelimited
-     * @memberof Nop
+     * @memberof EventList
      * @static
-     * @param {INop} message Nop message or plain object to encode
+     * @param {IEventList} message EventList message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    Nop.encodeDelimited = function encodeDelimited(message, writer) {
+    EventList.encodeDelimited = function encodeDelimited(message, writer) {
         return this.encode(message, writer).ldelim();
     };
 
     /**
-     * Decodes a Nop message from the specified reader or buffer.
+     * Decodes an EventList message from the specified reader or buffer.
      * @function decode
-     * @memberof Nop
+     * @memberof EventList
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
      * @param {number} [length] Message length if known beforehand
-     * @returns {Nop} Nop
+     * @returns {EventList} EventList
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    Nop.decode = function decode(reader, length) {
+    EventList.decode = function decode(reader, length) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Nop();
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.EventList();
         while (reader.pos < end) {
             var tag = reader.uint32();
             switch (tag >>> 3) {
+            case 1:
+                message.ref = reader.string();
+                break;
+            case 2:
+                if (!(message.events && message.events.length))
+                    message.events = [];
+                message.events.push($root.Event.decode(reader, reader.uint32()));
+                break;
             default:
                 reader.skipType(tag & 7);
                 break;
@@ -634,74 +775,501 @@ $root.Nop = (function() {
     };
 
     /**
-     * Decodes a Nop message from the specified reader or buffer, length delimited.
+     * Decodes an EventList message from the specified reader or buffer, length delimited.
      * @function decodeDelimited
-     * @memberof Nop
+     * @memberof EventList
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {Nop} Nop
+     * @returns {EventList} EventList
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    Nop.decodeDelimited = function decodeDelimited(reader) {
+    EventList.decodeDelimited = function decodeDelimited(reader) {
         if (!(reader instanceof $Reader))
             reader = new $Reader(reader);
         return this.decode(reader, reader.uint32());
     };
 
     /**
-     * Verifies a Nop message.
+     * Verifies an EventList message.
      * @function verify
-     * @memberof Nop
+     * @memberof EventList
      * @static
      * @param {Object.<string,*>} message Plain object to verify
      * @returns {string|null} `null` if valid, otherwise the reason why it is not
      */
-    Nop.verify = function verify(message) {
+    EventList.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
+        if (message.ref != null && message.hasOwnProperty("ref"))
+            if (!$util.isString(message.ref))
+                return "ref: string expected";
+        if (message.events != null && message.hasOwnProperty("events")) {
+            if (!Array.isArray(message.events))
+                return "events: array expected";
+            for (var i = 0; i < message.events.length; ++i) {
+                var error = $root.Event.verify(message.events[i]);
+                if (error)
+                    return "events." + error;
+            }
+        }
         return null;
     };
 
     /**
-     * Creates a Nop message from a plain object. Also converts values to their respective internal types.
+     * Creates an EventList message from a plain object. Also converts values to their respective internal types.
      * @function fromObject
-     * @memberof Nop
+     * @memberof EventList
      * @static
      * @param {Object.<string,*>} object Plain object
-     * @returns {Nop} Nop
+     * @returns {EventList} EventList
      */
-    Nop.fromObject = function fromObject(object) {
-        if (object instanceof $root.Nop)
+    EventList.fromObject = function fromObject(object) {
+        if (object instanceof $root.EventList)
             return object;
-        return new $root.Nop();
+        var message = new $root.EventList();
+        if (object.ref != null)
+            message.ref = String(object.ref);
+        if (object.events) {
+            if (!Array.isArray(object.events))
+                throw TypeError(".EventList.events: array expected");
+            message.events = [];
+            for (var i = 0; i < object.events.length; ++i) {
+                if (typeof object.events[i] !== "object")
+                    throw TypeError(".EventList.events: object expected");
+                message.events[i] = $root.Event.fromObject(object.events[i]);
+            }
+        }
+        return message;
     };
 
     /**
-     * Creates a plain object from a Nop message. Also converts values to other types if specified.
+     * Creates a plain object from an EventList message. Also converts values to other types if specified.
      * @function toObject
-     * @memberof Nop
+     * @memberof EventList
      * @static
-     * @param {Nop} message Nop
+     * @param {EventList} message EventList
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    Nop.toObject = function toObject() {
-        return {};
+    EventList.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.arrays || options.defaults)
+            object.events = [];
+        if (options.defaults)
+            object.ref = "";
+        if (message.ref != null && message.hasOwnProperty("ref"))
+            object.ref = message.ref;
+        if (message.events && message.events.length) {
+            object.events = [];
+            for (var j = 0; j < message.events.length; ++j)
+                object.events[j] = $root.Event.toObject(message.events[j], options);
+        }
+        return object;
     };
 
     /**
-     * Converts this Nop to JSON.
+     * Converts this EventList to JSON.
      * @function toJSON
-     * @memberof Nop
+     * @memberof EventList
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    Nop.prototype.toJSON = function toJSON() {
+    EventList.prototype.toJSON = function toJSON() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    return Nop;
+    return EventList;
+})();
+
+$root.NoteList = (function() {
+
+    /**
+     * Properties of a NoteList.
+     * @exports INoteList
+     * @interface INoteList
+     * @property {Array.<string>} [notes] NoteList notes
+     */
+
+    /**
+     * Constructs a new NoteList.
+     * @exports NoteList
+     * @classdesc Represents a NoteList.
+     * @constructor
+     * @param {INoteList=} [properties] Properties to set
+     */
+    function NoteList(properties) {
+        this.notes = [];
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * NoteList notes.
+     * @member {Array.<string>}notes
+     * @memberof NoteList
+     * @instance
+     */
+    NoteList.prototype.notes = $util.emptyArray;
+
+    /**
+     * Creates a new NoteList instance using the specified properties.
+     * @function create
+     * @memberof NoteList
+     * @static
+     * @param {INoteList=} [properties] Properties to set
+     * @returns {NoteList} NoteList instance
+     */
+    NoteList.create = function create(properties) {
+        return new NoteList(properties);
+    };
+
+    /**
+     * Encodes the specified NoteList message. Does not implicitly {@link NoteList.verify|verify} messages.
+     * @function encode
+     * @memberof NoteList
+     * @static
+     * @param {INoteList} message NoteList message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    NoteList.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.notes != null && message.notes.length)
+            for (var i = 0; i < message.notes.length; ++i)
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.notes[i]);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified NoteList message, length delimited. Does not implicitly {@link NoteList.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof NoteList
+     * @static
+     * @param {INoteList} message NoteList message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    NoteList.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a NoteList message from the specified reader or buffer.
+     * @function decode
+     * @memberof NoteList
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {NoteList} NoteList
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    NoteList.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.NoteList();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                if (!(message.notes && message.notes.length))
+                    message.notes = [];
+                message.notes.push(reader.string());
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a NoteList message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof NoteList
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {NoteList} NoteList
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    NoteList.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a NoteList message.
+     * @function verify
+     * @memberof NoteList
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    NoteList.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.notes != null && message.hasOwnProperty("notes")) {
+            if (!Array.isArray(message.notes))
+                return "notes: array expected";
+            for (var i = 0; i < message.notes.length; ++i)
+                if (!$util.isString(message.notes[i]))
+                    return "notes: string[] expected";
+        }
+        return null;
+    };
+
+    /**
+     * Creates a NoteList message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof NoteList
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {NoteList} NoteList
+     */
+    NoteList.fromObject = function fromObject(object) {
+        if (object instanceof $root.NoteList)
+            return object;
+        var message = new $root.NoteList();
+        if (object.notes) {
+            if (!Array.isArray(object.notes))
+                throw TypeError(".NoteList.notes: array expected");
+            message.notes = [];
+            for (var i = 0; i < object.notes.length; ++i)
+                message.notes[i] = String(object.notes[i]);
+        }
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a NoteList message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof NoteList
+     * @static
+     * @param {NoteList} message NoteList
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    NoteList.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.arrays || options.defaults)
+            object.notes = [];
+        if (message.notes && message.notes.length) {
+            object.notes = [];
+            for (var j = 0; j < message.notes.length; ++j)
+                object.notes[j] = message.notes[j];
+        }
+        return object;
+    };
+
+    /**
+     * Converts this NoteList to JSON.
+     * @function toJSON
+     * @memberof NoteList
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    NoteList.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return NoteList;
+})();
+
+$root.AddNote = (function() {
+
+    /**
+     * Properties of an AddNote.
+     * @exports IAddNote
+     * @interface IAddNote
+     * @property {string} [note] AddNote note
+     */
+
+    /**
+     * Constructs a new AddNote.
+     * @exports AddNote
+     * @classdesc Represents an AddNote.
+     * @constructor
+     * @param {IAddNote=} [properties] Properties to set
+     */
+    function AddNote(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * AddNote note.
+     * @member {string}note
+     * @memberof AddNote
+     * @instance
+     */
+    AddNote.prototype.note = "";
+
+    /**
+     * Creates a new AddNote instance using the specified properties.
+     * @function create
+     * @memberof AddNote
+     * @static
+     * @param {IAddNote=} [properties] Properties to set
+     * @returns {AddNote} AddNote instance
+     */
+    AddNote.create = function create(properties) {
+        return new AddNote(properties);
+    };
+
+    /**
+     * Encodes the specified AddNote message. Does not implicitly {@link AddNote.verify|verify} messages.
+     * @function encode
+     * @memberof AddNote
+     * @static
+     * @param {IAddNote} message AddNote message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    AddNote.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.note != null && message.hasOwnProperty("note"))
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.note);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified AddNote message, length delimited. Does not implicitly {@link AddNote.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof AddNote
+     * @static
+     * @param {IAddNote} message AddNote message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    AddNote.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes an AddNote message from the specified reader or buffer.
+     * @function decode
+     * @memberof AddNote
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {AddNote} AddNote
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    AddNote.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.AddNote();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                message.note = reader.string();
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes an AddNote message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof AddNote
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {AddNote} AddNote
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    AddNote.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies an AddNote message.
+     * @function verify
+     * @memberof AddNote
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    AddNote.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.note != null && message.hasOwnProperty("note"))
+            if (!$util.isString(message.note))
+                return "note: string expected";
+        return null;
+    };
+
+    /**
+     * Creates an AddNote message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof AddNote
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {AddNote} AddNote
+     */
+    AddNote.fromObject = function fromObject(object) {
+        if (object instanceof $root.AddNote)
+            return object;
+        var message = new $root.AddNote();
+        if (object.note != null)
+            message.note = String(object.note);
+        return message;
+    };
+
+    /**
+     * Creates a plain object from an AddNote message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof AddNote
+     * @static
+     * @param {AddNote} message AddNote
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    AddNote.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults)
+            object.note = "";
+        if (message.note != null && message.hasOwnProperty("note"))
+            object.note = message.note;
+        return object;
+    };
+
+    /**
+     * Converts this AddNote to JSON.
+     * @function toJSON
+     * @memberof AddNote
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    AddNote.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return AddNote;
 })();
 
 $root.PutProduct = (function() {

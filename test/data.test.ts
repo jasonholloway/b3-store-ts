@@ -1,54 +1,55 @@
-import { Fons, Sink, EventLog, EventReader, EventWriter } from '@woodpigeon/b3-data'
+import { Fons, Sink, InMemoryEventLog, IEventLog } from '@woodpigeon/b3-data'
+import { Payload, EventList, Event, AddNote } from '../src/protocol/v100'
 import { expect } from 'chai'
-
-
-import { ICommand, Command } from '../src/protocol/v100.js'
-
-
-const eventLog = new EventLog(
-                        (m) => Promise.resolve({}), 
-                        (m) => Promise.resolve(true));
-
-
-class TypedSink {
-
-    private sink: Sink;
-
-    constructor(log: EventLog) {
-        this.sink = new Sink(log);
-    }
-
-    async commit(command: Command) {
-        const err = Command.verify(command)
-        if(err) throw Error(err);
-
-        const buffer = Command.encodeDelimited(command).finish();
-        await this.sink.commit(buffer)
-    }
-
-    async flush() {
-        await this.sink.flush();
-    }
-
-}
-
+import * as Protobuf from 'protobufjs'
 
 describe('updates', () => {
 
     let sink : Sink
     let fons : Fons
-    let log : EventLog
+    let log : IEventLog
 
     beforeEach(() => {
-        log = new EventLog(null, null);
+        console.log('BEFOREEACH')
+        log = new InMemoryEventLog()
+        console.log('DONE')
         sink = new Sink(log)
         fons = new Fons(log)
+        console.log('END_BEFORE_EACH');
     });
 
-    it('can be committed', async () => {
-        const r = new Uint8Array(8);
-        await sink.commit(r);
-        expect(sink).to.be.null;
+    it('Add Note to NoteList', async () => {
+        const payload = new Payload({ eventLists: [
+            new EventList({
+                ref: '1234',
+                events: [
+                    new Event({                        
+                        version: 0,
+                        addNote: new AddNote({ note: 'hello' })
+                    })
+                ]
+            })        
+        ]})
+
+        const writer = new Protobuf.BufferWriter();
+        Payload.encode(payload, writer);
+        const buffer = writer.finish();
+        await sink.commit(new Int8Array(buffer));
+        await sink.flush();
+
+        const buffer2 = await fons.view('1234', 'Events');
+
+        console.log(buffer2.buffer);
+
+        const eventList = EventList.decode(new Uint8Array(buffer2));
+
+        expect(eventList.events).to.have.length(3);
+        expect(eventList.events[0]).to.eq('hello');
+
+        //refs need two parts:
+        //the stream GUID, and the name of the aggregator
+        //EventList is the simplest, obvs
+        //then others build on this
     });
 
     xit('can be regurgitated', async () => {

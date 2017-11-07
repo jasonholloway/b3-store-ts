@@ -1,8 +1,7 @@
-#!/bin/bash
-set -x
+#!/bin/bash -x
 
 protoVersion=v100
-protoFile=../store/store/src/main/protobuf/${protoVersion}.proto
+protoFile=../store/schema/shared/src/main/protobuf/${protoVersion}.proto
 targetDir=./src/protocol
 
 tempFile=temp.proto~
