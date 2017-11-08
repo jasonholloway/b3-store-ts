@@ -10,12 +10,9 @@ describe('updates', () => {
     let log : IEventLog
 
     beforeEach(() => {
-        console.log('BEFOREEACH')
         log = new InMemoryEventLog()
-        console.log('DONE')
         sink = new Sink(log)
         fons = new Fons(log)
-        console.log('END_BEFORE_EACH');
     });
 
     it('Add Note to NoteList', async () => {
@@ -39,12 +36,10 @@ describe('updates', () => {
 
         const buffer2 = await fons.view('1234', 'Events');
 
-        console.log(buffer2.buffer);
-
         const eventList = EventList.decode(new Uint8Array(buffer2));
 
-        expect(eventList.events).to.have.length(3);
-        expect(eventList.events[0]).to.eq('hello');
+        expect(eventList.events).to.have.length(1);
+        expect(eventList.events[0].addNote.note).to.eq('hello');
 
         //refs need two parts:
         //the stream GUID, and the name of the aggregator
